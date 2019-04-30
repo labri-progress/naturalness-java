@@ -19,22 +19,23 @@ under the License.
 
 package com.naturalness;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
-public class NaturalnessModel {
+public class NaturalnessModel<T extends Comparable> {
     private final int DEPTH_DEFAULT = 3;
     private final double PROBA_OF_UNKNOWN_DEFAULT = 1e-6;
 
     private int depth;
     private double probaOfUnknown;
-    private Map<NGram, NGramSuccessorModel> ngramMap; 
+    private Map<NGram<T>, NGramSuccessorModel> ngramMap;
 
     public NaturalnessModel() {
         depth = DEPTH_DEFAULT;
         probaOfUnknown = PROBA_OF_UNKNOWN_DEFAULT;
-        ngramMap = new HashMap<NGram, NGramSuccessorModel>();
+        ngramMap = new HashMap<>();
     }
 
     public NaturalnessModel(int depth, double probaOfUnknown) {
@@ -84,6 +85,14 @@ public class NaturalnessModel {
             return 0;
         }
         return ngramMap.get(ngram).getProbability(event);
+    }
+
+    public final void learn(T... events) {
+        learn(Arrays.asList(events));
+    }
+
+    public final void learn(List<T> eventList) {
+        learn(new Sequence(eventList));
     }
 
     public void learn(Sequence sequence) {

@@ -1,5 +1,6 @@
 package com.naturalness;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 
@@ -11,11 +12,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class NaturalnessModelTest {
+    public static final double DELTA = 0;
+    public static final double ZERO_PROBA = 0;
     private static List<Sequence> sequenceList;
 
     @BeforeClass
     public static void buildSequence() {
-        sequenceList = new ArrayList<Sequence>();
+        sequenceList = new ArrayList<>();
         Event a = new Event("a");
         Event b = new Event("b");
         Event c = new Event("c");
@@ -30,57 +33,57 @@ public class NaturalnessModelTest {
     
     @Test
     public void regressionTest() {
-        NaturalnessModel model = new NaturalnessModel(3,0);
-        Event a = new Event("a");
-        Event b = new Event("b");
-        Event c = new Event("c");
-        Event d = new Event("d");
+        NaturalnessModel model = new NaturalnessModel(3, ZERO_PROBA);
+        Event<String> a = new Event("a");
+        Event<String> b = new Event("b");
+        Event<String> c = new Event("c");
+        Event<String> d = new Event("d");
         model.learn(new Sequence(Arrays.asList(a, b, c)));
         double probaA = model.getProbability(new NGram(Arrays.asList()), a);
-        assertTrue(probaA == 1.0);
+        assertEquals(probaA, 1.0, DELTA);
         double probaB = model.getProbability(new NGram(Arrays.asList(a)), b);
-        assertTrue(probaB == 1.0);
+        assertEquals(probaB, 1.0, DELTA);
         double probaC = model.getProbability(new NGram(Arrays.asList(a,b)), c);
-        assertTrue(probaC == 1.0);
+        assertEquals(probaC, 1.0, DELTA);
         model.learn(new Sequence(Arrays.asList(a, b, d)));
         probaA = model.getProbability(new NGram(Arrays.asList()), a);
-        assertTrue(probaA == 1.0);
+        assertEquals(probaA, 1.0, DELTA);
         probaB = model.getProbability(new NGram(Arrays.asList(a)), b);
-        assertTrue(probaB == 1.0);
+        assertEquals(probaB, 1.0, DELTA);
         probaC = model.getProbability(new NGram(Arrays.asList(a,b)), c);
-        assertTrue(probaC == 0.5);
+        assertEquals(probaC, 0.5, DELTA);
         System.out.println(probaC);
         double probaD = model.getProbability(new NGram(Arrays.asList(a,b)), d);
-        assertTrue(probaD == 0.5);
+        assertEquals(probaD,0.5, DELTA);
         double proba = model.getProbability(new NGram(Arrays.asList(a, b)), d);
         System.out.println(proba);
         double ce = model.crossEntropy(new Sequence(Arrays.asList(a, b, d)));
         System.out.println(ce);
-        assertTrue(ce > 0);
+        assertTrue(ce > DELTA);
     }
 
     @Test
     public void shouldReturnInfinityCrossEntropy() {
-        NaturalnessModel model = new NaturalnessModel(3,0);
+        NaturalnessModel model = new NaturalnessModel(3, ZERO_PROBA);
         double ce = model.crossEntropy(sequenceList.get(0));
         assertTrue(Double.isInfinite(ce));
     }
 
     @Test
     public void shouldDealWithEmptySequence() {
-        NaturalnessModel model = new NaturalnessModel(3,0);
-        Sequence emptySequence = new Sequence(new ArrayList<Event>());
+        NaturalnessModel model = new NaturalnessModel(3, DELTA);
+        Sequence emptySequence = new Sequence(new ArrayList<>());
         double ce = model.crossEntropy(emptySequence);
-        assertTrue(ce == 0);
+        assertEquals(ce, 0, DELTA);
     }
 
     @Test
     public void shouldComputeAllRightCrossEntropy() {
-        NaturalnessModel model = new NaturalnessModel(3,0);
+        NaturalnessModel model = new NaturalnessModel(3, DELTA);
         model.learn(sequenceList.get(0));
         double ce = model.crossEntropy(sequenceList.get(0));
         double expected = -(5 * Math.log(1)/Math.log(2)) / 5;
-        assertTrue(ce == expected);
+        assertEquals(expected, ce, DELTA);
     }
 
     @Test

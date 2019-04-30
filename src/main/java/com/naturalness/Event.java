@@ -21,17 +21,17 @@ package com.naturalness;
 
 import java.util.Objects;
 
-public class Event {
-    private String value;
+public class Event<T extends Comparable> {
+    private T value;
 
-    public Event(String value) {
+    public Event(T value) {
         if (value == null) {
             throw new IllegalArgumentException("value cannot be null");
         }
         this.value = value;
     }
 
-    public String getValue() {
+    public T getValue() {
         return value;
     }
 
@@ -41,7 +41,7 @@ public class Event {
             return false;
         }
         Event otherEvent = (Event) other;
-        return value.compareTo(otherEvent.value)==0;
+        return otherEvent.value.compareTo(value) == 0 ;
     }
 
     @Override

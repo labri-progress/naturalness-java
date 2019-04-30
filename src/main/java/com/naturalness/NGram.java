@@ -23,14 +23,14 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class NGram {
+public class NGram<T extends Comparable> {
     private List<Event> eventList;
 
-    public NGram(List<Event> eventList) {
+    public NGram(List<Event<T>> eventList) {
         if (eventList == null) {
             throw new IllegalArgumentException("cannot create NGram with null");
         }
-        this.eventList = new ArrayList<Event>(eventList);
+        this.eventList = new ArrayList<>(eventList);
     }
 
     @Override
@@ -38,13 +38,13 @@ public class NGram {
         if (!(other instanceof NGram)) {
             return false;
         }
-        NGram otherNGram = (NGram) other;
+        NGram<T> otherNGram = (NGram) other;
         if (otherNGram.eventList.size() != this.eventList.size()) {
             return false;
         }
         for (int i = 0 ; i < otherNGram.eventList.size() ; i++) {
-            Event otherEvent = otherNGram.eventList.get(i);
-            Event thisEvent = this.eventList.get(i);
+            Event<T> otherEvent = otherNGram.eventList.get(i);
+            Event<T> thisEvent = this.eventList.get(i);
             if (! otherEvent.equals(thisEvent)) {
                 return false;
             }
@@ -54,8 +54,7 @@ public class NGram {
 
     @Override
     public int hashCode() {
-        String value = this.eventList.stream().map( e -> e.getValue()).reduce("" , (accu, cur) -> accu + cur);
-        return Objects.hash(value);
+        return eventList.hashCode();
     }
 
 }

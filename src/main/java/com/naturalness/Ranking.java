@@ -19,20 +19,16 @@ under the License.
 
 package com.naturalness;
 
-public class Ranking {
-  private Sequence sequence;
+public class Ranking<T extends Comparable> {
+  private Sequence<T> sequence;
   private double crossEntropy;
 
-  public Ranking(Sequence sequence, double crossEntropy) {
+  public Ranking(Sequence<T> sequence, double crossEntropy) {
     this.sequence = sequence;
     this.crossEntropy = crossEntropy;
   }
 
-  public Sequence getSequence() {
+  public Sequence<T> getSequence() {
       return sequence;
-  }
-
-  public double getCrossEntropy() {
-      return crossEntropy;
   }
 }

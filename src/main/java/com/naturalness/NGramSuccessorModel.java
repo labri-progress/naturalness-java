@@ -22,18 +22,18 @@ package com.naturalness;
 import java.util.HashMap;
 import java.util.Map;
 
-public class NGramSuccessorModel {
+public class NGramSuccessorModel<T extends Comparable> {
     private final int NULL_PROBABILITY = 0;
-    private Map<Event, Integer> successorMap;
+    private Map<Event<T>, Integer> successorMap;
     private int occurence;
     
 
     public NGramSuccessorModel() {
-        this.successorMap = new HashMap<Event, Integer>();
+        this.successorMap = new HashMap<>();
         this.occurence = 0;
     }
 
-    public double getProbability(Event event) {
+    public double getProbability(Event<T> event) {
         if (event == null) {
             throw new IllegalArgumentException("event cannot be null");
         }
@@ -43,7 +43,7 @@ public class NGramSuccessorModel {
         return successorMap.get(event).intValue() / occurence;
     }
 
-    public void learn(Event event) {
+    public void learn(Event<T> event) {
         if (event == null) {
             throw new IllegalArgumentException("event cannot be null");
         }

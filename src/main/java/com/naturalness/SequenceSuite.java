@@ -22,24 +22,24 @@ package com.naturalness;
 import java.util.List;
 import java.util.ArrayList;
 
-public class SequenceSuite {
+public class SequenceSuite<T extends Comparable> {
     private final int DEPTH_DEFAULT = 3;
     private final double PROBA_OF_UNKNOWN_DEFAULT = 1e-6;
 
     private int depth;
     private double probaOfUnknown;
-    private List<Sequence> sequenceList;
+    private List<Sequence<T>> sequenceList;
 
-    public SequenceSuite(List<Sequence> sequenceList) {
+    public SequenceSuite(List<Sequence<T>> sequenceList) {
         if (sequenceList == null) {
             throw new IllegalArgumentException("SequenceSuite new with null");
         }
         this.depth = DEPTH_DEFAULT;
         this.probaOfUnknown = PROBA_OF_UNKNOWN_DEFAULT;
-        this.sequenceList = new ArrayList<Sequence>(sequenceList);
+        this.sequenceList = new ArrayList<>(sequenceList);
     }
 
-    public SequenceSuite(List<Sequence> sequenceList, int depth, double probaOfUnknown) {
+    public SequenceSuite(List<Sequence<T>> sequenceList, int depth, double probaOfUnknown) {
         this(sequenceList);
         this.depth = depth;
         this.probaOfUnknown = probaOfUnknown;
@@ -51,17 +51,17 @@ public class SequenceSuite {
         }
 
         double minEntropy = -Math.log(probaOfUnknown)/Math.log(2);
-        Sequence minSequence = sequenceList.get(0);
+        Sequence<T> minSequence = sequenceList.get(0);
 
         if (sequenceList.size() == 1) {
             return new Ranking(sequenceList.get(0), minEntropy);
         }
 
         for (int i = 0; i < sequenceList.size(); i++) {
-            NaturalnessModel model = new NaturalnessModel(this.depth, this.probaOfUnknown);
-            List<Sequence> suiteCopy = new ArrayList<Sequence>(sequenceList);
+            NaturalnessModel<T> model = new NaturalnessModel<>(this.depth, this.probaOfUnknown);
+            List<Sequence<T>> suiteCopy = new ArrayList<>(sequenceList);
             Sequence current = suiteCopy.remove(i);
-            for (Sequence sequence : suiteCopy) {
+            for (Sequence<T> sequence : suiteCopy) {
                 model.learn(sequence);
             }
             double currentCrossEntropy = model.crossEntropy(current);
