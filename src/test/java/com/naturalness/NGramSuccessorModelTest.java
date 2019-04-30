@@ -1,5 +1,6 @@
 package com.naturalness;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -10,7 +11,7 @@ public class NGramSuccessorModelTest {
     public void shouldReturnNullProbability() {
         NGramSuccessorModel model = new NGramSuccessorModel();
         double proba = model.getProbability(new Event("hey"));   
-        assertTrue(proba == 0);
+        assertEquals(0, proba, 0);
     }
 
     @Test
@@ -18,16 +19,16 @@ public class NGramSuccessorModelTest {
         NGramSuccessorModel model = new NGramSuccessorModel();
         model.learn(new Event("a"));
         double proba = model.getProbability(new Event("a"));   
-        assertTrue(proba == 1);
+        assertEquals(1, proba, 0);
         model.learn(new Event("a"));
         proba = model.getProbability(new Event("a"));   
-        assertTrue(proba == 1);
+        assertEquals(1, proba, 0);
         model.learn(new Event("b"));
         proba = model.getProbability(new Event("a"));   
-        assertTrue(proba == 2/3);
+        assertEquals(2d/3d, proba , 0);
         proba = model.getProbability(new Event("b"));   
-        assertTrue(proba == 1/3);
+        assertEquals(1d/3d, proba, 0);
         proba = model.getProbability(new Event("c"));   
-        assertTrue(proba == 0);
+        assertEquals(0, proba, 0);
     }
 }

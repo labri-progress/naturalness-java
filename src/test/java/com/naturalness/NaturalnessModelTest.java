@@ -45,20 +45,18 @@ public class NaturalnessModelTest {
         assertEquals(probaB, 1.0, DELTA);
         double probaC = model.getProbability(new NGram(a,b), c);
         assertEquals(probaC, 1.0, DELTA);
-        model.learn(new Sequence(Arrays.asList(a, b, d)));
+        model.learn(a, b, d);
         probaA = model.getProbability(new NGram(), a);
         assertEquals(probaA, 1.0, DELTA);
         probaB = model.getProbability(new NGram(a), b);
         assertEquals(probaB, 1.0, DELTA);
         probaC = model.getProbability(new NGram(a, b), c);
         assertEquals(0.5, probaC, DELTA);
-        System.out.println(probaC);
         double probaD = model.getProbability(new NGram(a, b), d);
         assertEquals(probaD,0.5, DELTA);
         double proba = model.getProbability(new NGram(a, b), d);
         System.out.println(proba);
         double ce = model.crossEntropy(new Sequence(a, b, d));
-        System.out.println(ce);
         assertTrue(ce > DELTA);
     }
 

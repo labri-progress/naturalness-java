@@ -40,7 +40,9 @@ public class NGramSuccessorModel<T extends Comparable> {
         if (!successorMap.containsKey(event)) {
             return NULL_PROBABILITY;
         }
-        return successorMap.get(event).intValue() / occurence;
+        double eventOccurence = successorMap.get(event).doubleValue();
+        double proba = eventOccurence / occurence;
+        return  proba;
     }
 
     public void learn(Event<T> event) {
