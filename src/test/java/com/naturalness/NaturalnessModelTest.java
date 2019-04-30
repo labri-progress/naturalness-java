@@ -25,9 +25,9 @@ public class NaturalnessModelTest {
         Event d = new Event("d");
         Event e = new Event("e");
         Event f = new Event("f");
-        sequenceList.add(new Sequence(Arrays.asList(a, b, c, d, e)));
-        sequenceList.add(new Sequence(Arrays.asList(a, b, c, d, c)));
-        sequenceList.add(new Sequence(Arrays.asList(f, f, f, f, f, f)));  
+        sequenceList.add(new Sequence(a, b, c, d, e));
+        sequenceList.add(new Sequence(a, b, c, d, c));
+        sequenceList.add(new Sequence(f, f, f, f, f, f));
     }      
     
     
