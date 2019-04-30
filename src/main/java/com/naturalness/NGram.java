@@ -19,12 +19,17 @@ under the License.
 
 package com.naturalness;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class NGram<T extends Comparable> {
     private List<Event> eventList;
+
+    public NGram(Event<T>... events) {
+        this(Arrays.asList(events));
+    }
 
     public NGram(List<Event<T>> eventList) {
         if (eventList == null) {
@@ -38,7 +43,7 @@ public class NGram<T extends Comparable> {
         if (!(other instanceof NGram)) {
             return false;
         }
-        NGram<T> otherNGram = (NGram) other;
+        NGram<T> otherNGram = (NGram<T>) other;
         if (otherNGram.eventList.size() != this.eventList.size()) {
             return false;
         }

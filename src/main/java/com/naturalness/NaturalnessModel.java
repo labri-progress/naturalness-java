@@ -87,16 +87,16 @@ public class NaturalnessModel<T extends Comparable> {
         return ngramMap.get(ngram).getProbability(event);
     }
 
-    public final void learn(T... events) {
+    public final void learn(Event<T>... events) {
         learn(Arrays.asList(events));
     }
 
-    public final void learn(List<T> eventList) {
+    public final void learn(List<Event<T>> eventList) {
         learn(new Sequence(eventList));
     }
 
-    public void learn(Sequence sequence) {
-        List<Event> eventList = sequence.getEventList();
+    public void learn(Sequence<T> sequence) {
+        List<Event<T>> eventList = sequence.getEventList();
         for (int i = 0; i < eventList.size() ; i++) {
             NGram ngram = sequence.getNgram(i, depth);
             if (!ngramMap.containsKey(ngram)) {

@@ -12,14 +12,9 @@ import org.junit.Test;
 
 public class NGramTest {
 
-    @Test
+    @Test(expected = Exception.class)
     public void shouldCreateNGram() {
-        try {
-            new NGram(null);
-            fail();
-        } catch (Exception ex) {
-
-        }   
+        new NGram<>((List<Event<String>>)null);
     }
 
     @Test

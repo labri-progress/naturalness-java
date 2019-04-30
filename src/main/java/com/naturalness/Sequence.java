@@ -19,41 +19,42 @@ under the License.
 
 package com.naturalness;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.ArrayList;
 
 public class Sequence<T extends Comparable> {
-  private List<Event<T>> eventList;
+    private List<Event<T>> eventList;
 
-  public Sequence() {
-    eventList = new ArrayList<>();
-  }
-
-  public Sequence(List<Event<T>> eventList) {
-    this.eventList = new ArrayList<>(eventList);
-  }
-
-  public List<Event<T>> getEventList() {
-    return new ArrayList<>(eventList);
-  }
-
-  public void append(Event<T> event) {
-    eventList.add(event);
-  }
-
-  public NGram<T> getNgram(int before, int size) {
-    List<Event<T>> ngramEventList = new ArrayList<>();
-    if (before > 0) {
-      int from = Math.max(0, before - size);
-      for (int i = from; i < before ; i++) {
-        ngramEventList.add(eventList.get(i));
-      }
+    public Sequence(Event<T>... events) {
+        this(Arrays.asList(events));
     }
-    return new NGram<>(ngramEventList);
-  }
 
-  @Override
+    public Sequence(List<Event<T>> eventList) {
+        this.eventList = new ArrayList<>(eventList);
+    }
+
+    public List<Event<T>> getEventList() {
+        return new ArrayList<>(eventList);
+    }
+
+    public void append(Event<T> event) {
+        eventList.add(event);
+    }
+
+    public NGram<T> getNgram(int before, int size) {
+        List<Event<T>> ngramEventList = new ArrayList<>();
+        if (before > 0) {
+            int from = Math.max(0, before - size);
+            for (int i = from; i < before; i++) {
+                ngramEventList.add(eventList.get(i));
+            }
+        }
+        return new NGram<>(ngramEventList);
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (!(other instanceof Sequence)) {
             return false;
@@ -62,10 +63,10 @@ public class Sequence<T extends Comparable> {
         if (otherSequence.eventList.size() != this.eventList.size()) {
             return false;
         }
-        for (int i = 0 ; i < otherSequence.eventList.size() ; i++) {
+        for (int i = 0; i < otherSequence.eventList.size(); i++) {
             Event<T> otherEvent = otherSequence.eventList.get(i);
             Event<T> thisEvent = this.eventList.get(i);
-            if (! otherEvent.equals(thisEvent)) {
+            if (!otherEvent.equals(thisEvent)) {
                 return false;
             }
         }
