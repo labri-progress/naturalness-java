@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
-public class NaturalnessModel<T extends Comparable> {
+public class NaturalnessModel<T> {
     private final int DEPTH_DEFAULT = 3;
     private final double PROBA_OF_UNKNOWN_DEFAULT = 1e-6;
 

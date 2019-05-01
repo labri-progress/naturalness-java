@@ -21,7 +21,7 @@ package com.naturalness;
 
 import java.util.Objects;
 
-public class Event<T extends Comparable> {
+public class Event<T> {
     private T value;
 
     public Event(T value) {
@@ -41,12 +41,12 @@ public class Event<T extends Comparable> {
             return false;
         }
         Event otherEvent = (Event) other;
-        return otherEvent.value.compareTo(value) == 0 ;
+        return otherEvent.value.equals(value);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value);
+        return value.hashCode();
     }
 
 

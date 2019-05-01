@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class NGram<T extends Comparable> {
+public class NGram<T> {
     private List<Event> eventList;
 
     public NGram(Event<T>... events) {

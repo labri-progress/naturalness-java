@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.ArrayList;
 
-public class Sequence<T extends Comparable> {
+public class Sequence<T> {
     private List<Event<T>> eventList;
 
     public Sequence(Event<T>... events) {

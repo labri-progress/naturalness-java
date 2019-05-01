@@ -22,7 +22,7 @@ package com.naturalness;
 import java.util.List;
 import java.util.ArrayList;
 
-public class SequenceSuite<T extends Comparable> {
+public class SequenceSuite<T> {
     private final int DEPTH_DEFAULT = 3;
     private final double PROBA_OF_UNKNOWN_DEFAULT = 1e-6;
 

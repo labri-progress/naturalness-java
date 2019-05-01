@@ -22,7 +22,7 @@ package com.naturalness;
 import java.util.HashMap;
 import java.util.Map;
 
-public class NGramSuccessorModel<T extends Comparable> {
+public class NGramSuccessorModel<T> {
     private final int NULL_PROBABILITY = 0;
     private Map<Event<T>, Integer> successorMap;
     private int occurence;
