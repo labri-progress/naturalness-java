@@ -10,7 +10,7 @@
   <name>naturalness</name>
 
   <properties>
-    <java.version>10</java.version>
+    <java.version>8</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -81,8 +81,8 @@
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.8.0</version>
           <configuration>
-			  <source>${java.version}</source>
-			  <target>${java.version}</target>
+            <source>${java.version}</source>
+            <target>${java.version}</target>
           </configuration>
         </plugin>
         <plugin>
