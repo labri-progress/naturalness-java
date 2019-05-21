@@ -5,7 +5,7 @@
 
   <groupId>com.github.labri-progress</groupId>
   <artifactId>naturalness-java</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
 
   <name>naturalness-java</name>
 
@@ -39,7 +39,7 @@
     <connection>scm:git:git://github.com/labri-progress/naturalness-java.git</connection>
     <developerConnection>scm:git:git@github.com:labri-progress/naturalness-java.git</developerConnection>
     <url>https://github.com/labri-progress/naturalness-java</url>
-    <tag>HEAD</tag>
+    <tag>naturalness-java-1.0</tag>
   </scm>
 
   
