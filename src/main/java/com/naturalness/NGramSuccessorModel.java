@@ -58,7 +58,7 @@ public class NGramSuccessorModel<T> {
         occurence++;
     }
 
-    public int getOccurence() {
+    public int occurence() {
         return occurence;
     }
 
