@@ -106,4 +106,22 @@ public class NaturalnessModel<T> {
             ngramSuccessor.learn(eventList.get(i));   
         }
     }
+
+    public int size() {
+        int size = 0;
+        for (NGramSuccessorModel successorModel : ngramMap.values()) {
+            size += successorModel.size();
+        }
+        return size;
+    }
+
+    public int occurence() {
+        int occurence = 0;
+        for (NGramSuccessorModel successorModel : ngramMap.values()) {
+            occurence += successorModel.occurence();
+        }
+        return occurence;
+    }
+
+
 }

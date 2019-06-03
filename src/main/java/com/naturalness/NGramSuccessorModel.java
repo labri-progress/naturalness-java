@@ -58,4 +58,12 @@ public class NGramSuccessorModel<T> {
         occurence++;
     }
 
+    public int getOccurence() {
+        return occurence;
+    }
+
+    public int size() {
+        return successorMap.size();
+    }
+
 }

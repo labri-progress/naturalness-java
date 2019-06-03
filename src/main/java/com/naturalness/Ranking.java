@@ -31,4 +31,8 @@ public class Ranking<T> {
   public Sequence<T> getSequence() {
       return sequence;
   }
+
+  public double getCrossEntropy() {
+    return crossEntropy;
+  }
 }
